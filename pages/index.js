@@ -12,12 +12,26 @@ function HomePage(props) {
   );
 }
 
-export async function getStaticProps() {
+export async function getStaticProps(context) {
   console.log("(Re-) Generating...");
   const jsonData = await fs.readFile(
     path.join(process.cwd(), "data", "dummy-backend.json")
   );
   const data = JSON.parse(jsonData);
+
+  // redirect
+  if (!data) {
+    return {
+      redirect: {
+        destination: "/no-data",
+      },
+    };
+  }
+
+  // renders 404 page
+  if (data.products.length === 0) {
+    return { notFound: true };
+  }
 
   return {
     props: {
