@@ -1,9 +1,30 @@
-import styles from '../styles/Home.module.css'
+import fs from "fs/promises";
+import path from "path";
 
-export default function Home() {
+function HomePage(props) {
+  const { products } = props;
   return (
-    <div className={styles.container}>
-      <h1>Hello Next World!</h1>
-    </div>
-  )
+    <ul>
+      {products.map((product) => (
+        <li>{product.title}</li>
+      ))}
+    </ul>
+  );
 }
+
+export async function getStaticProps() {
+  console.log("(Re-) Generating...");
+  const jsonData = await fs.readFile(
+    path.join(process.cwd(), "data", "dummy-backend.json")
+  );
+  const data = JSON.parse(jsonData);
+
+  return {
+    props: {
+      products: data.products,
+    },
+    revalidate: 13, // ISG
+  };
+}
+
+export default HomePage;
