@@ -47,3 +47,12 @@
  ```
 
 - `fallback: 'blocking'` - No need to provide fallback state. Next waits till page is generated and ready before it serves it.
+
+### Server-Side Rendering SSR
+
+- Sometimes you need to pre-render for every request OR you need access to the request object (e.g cookies)
+- NextJs allows you to run `real server-side code` as well
+
+```js
+    export async function getServerSideProps() { ... }
+```
