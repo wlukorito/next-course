@@ -56,3 +56,17 @@
 ```js
     export async function getServerSideProps() { ... }
 ```
+
+## Creating Firebase Database
+
+- Go to [Firebase](https://firebase.google.com/)
+- From menu bar select `Go to console`
+- Login with google account if not signed in already
+- Select `Create Project` or `Add Project` and give it a name
+- Under security rules, `use test mode`
+- From the side menu choose `Realtime Database`
+- Create your database. Copy the url eg `https://next-course-54a9c-default-rtdb.firebaseio.com/sales.json`
+
+## SWR hook (stale-while-revalidate)
+
+- Install `yarn add swr`
